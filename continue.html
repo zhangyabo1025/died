@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>Continue</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .terminal {
+      flex: 1;
+      white-space: pre-wrap;
+    }
+
+    .image-area {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-area img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .prompt {
+      color: #00ff00;
+      font-weight: bold;
+    }
+
+    .input-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .input-line input {
+      background: black;
+      color: #00ff00;
+      border: none;
+      font-family: inherit;
+      font-size: 1em;
+      outline: none;
+      width: 100%;
+    }
+
+    .esc-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      color: #00ff00;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div id="content"></div>
+    <br/>
+    <div class="input-line">
+      <span class="prompt">user@h4ck3r:~$&nbsp;</span>
+      <input type="text" id="commandInput" autocomplete="off" autofocus />
+    </div>
+  </div>
+
+  <div class="image-area">
+    <img src="https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1719386225646.jpg" alt="continue meme">
+  </div>
+
+  <div class="esc-hint">按 ESC 返回</div>
+
+  <script>
+    const contentText = `來到資安班你可以切身體驗何為充實。
+我們有的是活動可以參加，不怕你太閒，只怕你太忙!
+
+AI資安學程是一個分散式學習的資安專班，學習過程強調「學中做、做中學」及「自主學習」，
+這裡聚集了許多志同道合的夥伴，不論是技術交流還是組隊競賽都能找到
+劈腿只有零次跟無數次，網站攻擊也只有零次跟無數次！！
+
+快來加入我們這個大家庭 ，一起體驗資安的樂趣！`;
+
+    const contentDiv = document.getElementById('content');
+    let index = 0;
+
+    function typeNextChar() {
+      if (index < contentText.length) {
+        contentDiv.textContent += contentText[index++];
+        setTimeout(typeNextChar, 20); // 控制打字速度
+      }
+    }
+
+    typeNextChar();
+
+    document.getElementById('commandInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const command = this.value.trim();
+        if (command === 'continue') {
+          window.location.href = 'next.html'; // 自訂下一頁
+        }
+        this.value = '';
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        window.history.back();
+      }
+    });
+  </script>
+</body>
+</html>
