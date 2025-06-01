@@ -96,11 +96,12 @@
     function handleCommand(cmd) {
       if (cmd === "help") {
         output.innerHTML += `
-ls             ：列出所有目錄
 cat <檔名>     ：查看檔案內容
+ls             ：列出所有目錄
 scan           ：模擬系統掃描
 clear          ：清除畫面
-exit           ：離開模擬器`;
+exit           ：離開模擬器
+back           ：返回上一頁`;
       } else if (cmd === "ls") {
         output.innerHTML += `\n資安班.txt\nflag.txt\nourphotos`;
       } else if (cmd.startsWith("cat ")) {
@@ -122,6 +123,11 @@ exit           ：離開模擬器`;
       } else if (cmd === "exit") {
         output.innerHTML += `\n再見！`;
         input.disabled = true;
+      } else if (cmd === "back") {
+        output.innerHTML += `\n返回上一頁中...`;
+        setTimeout(() => {
+          history.back();
+        }, 1000);
       } else {
         output.innerHTML += `\n未知指令：${cmd}`;
       }
